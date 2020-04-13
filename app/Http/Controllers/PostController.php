@@ -56,7 +56,7 @@ class PostController extends Controller
             'content' => $request->content,
             'image' => $image,
             'published_at' => $request->published_at,
-            'category_id' => $request->category
+            'category_id' => $request->category,
         ]);
 
         session()->flash('success','Post Created Successfully');
@@ -95,7 +95,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only(['title','description','content','published_at','category_id','image']);
+        $data = $request->only(['title','description','content','published_at','category','image']);
         
         if($request->hasFile('image')){
             $image = $request->image->store('posts');

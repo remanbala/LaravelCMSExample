@@ -30,6 +30,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function(){
   Route::resource('category','CategoryController');
 
+  Route::resource('tags','TagsController');
+
   Route::resource('post','PostController');
 
   Route::get('trashed-posts','PostController@trashed')->name('trashed-posts.index');

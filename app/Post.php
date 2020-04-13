@@ -17,7 +17,7 @@ class Post extends Model
         'content',
         'image',
         'published_at',
-        'category_id'
+        'category_id',
     ];
 
     public function deleteImage()
