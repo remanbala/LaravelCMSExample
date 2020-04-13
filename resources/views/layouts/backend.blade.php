@@ -120,6 +120,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       @endif
 
+      @if (session()->has('error'))
+        <div class="alert alert-success">
+            {{ session()->get('error') }}
+        </div>
+      @endif
+
       @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-group">

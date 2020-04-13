@@ -25,13 +25,17 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('category','CategoryController');
 
-Route::resource('post','PostController')->middleware('auth');
 
-Route::get('trashed-posts','PostController@trashed')->name('trashed-posts.index');
+Route::middleware('auth')->group(function(){
+  Route::resource('category','CategoryController');
 
-Route::put('restore-posts/{post}','PostController@restore')->name('restore-posts');
+  Route::resource('post','PostController');
+
+  Route::get('trashed-posts','PostController@trashed')->name('trashed-posts.index');
+
+  Route::put('restore-posts/{post}','PostController@restore')->name('restore-posts');
+});
 
 
 

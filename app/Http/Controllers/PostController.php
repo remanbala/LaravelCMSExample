@@ -16,6 +16,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('verifyCategoriesCount')->only(['create','store']);
+    }
+
+
     public function index()
     {
         $posts = Post::all();
@@ -88,14 +95,13 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only(['title','description','content','published_at']);
+        $data = $request->only(['title','description','content','published_at','category_id','image']);
         
         if($request->hasFile('image')){
             $image = $request->image->store('posts');
             $post->deleteImage();
         }
 
-        $data['image'] = $image;
 
         $post->update($data);
         
