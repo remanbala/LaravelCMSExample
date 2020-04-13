@@ -21,6 +21,7 @@
         <thead>
           <tr>
             <th scope="col">Category Name</th>
+            <th scope="col">Post Count</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -30,6 +31,9 @@
             <tr>
                 
                 <td>{{ $category->name }}</td>
+                <td>
+                    {{ $category->post->count() }}
+                </td>
                 <td>
                     {{-- <form action="{{ route('category.edit', $category->id) }}" method="GET">
                         @csrf

@@ -46,6 +46,25 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            @if (isset($posts))
+                                @if($category->id == $posts->category_id)
+                                selected
+                                @endif
+                            @endif
+                            
+                            >
+                        {{ $category->name }}
+                        </option>
+                        @endforeach
+                        
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="published_at">Published At</label>
                     <input type="text" class="form-control" name="published_at" id="published_at" value="{{ isset($posts) ? $posts->published_at : '' }}">
                 </div>
@@ -69,6 +88,8 @@
                         {{ isset($posts) ? 'Update Post' : 'Create Post'}}
                     </button>
                 </div>
+
+               
                 </form>
 
         </div>
