@@ -29,6 +29,7 @@
                     <th>Image</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
