@@ -32,7 +32,7 @@
                 
                 <td>{{ $tagItem->name }}</td>
                 <td>
-                  {{ $tagItem->post->count() }}
+                  {{ $tagItem->posts->count() }}
                 </td>
                 
                 <td>

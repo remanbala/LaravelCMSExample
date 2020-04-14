@@ -109,7 +109,7 @@ class PostController extends Controller
             $post->deleteImage();
 
 
-            $data['image'] = $image;
+           $post->image = $image;
         }
 
         $post->title = $request->title;
@@ -117,6 +117,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->published_at = $request->published_at;
         $post->category_id = $request->category;
+
         $post->save();
         
 
