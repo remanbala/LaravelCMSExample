@@ -21,7 +21,7 @@
         <thead>
           <tr>
             <th scope="col">Tag Name</th>
-           
+            <th scope="col">Post Count</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -31,6 +31,9 @@
             <tr>
                 
                 <td>{{ $tagItem->name }}</td>
+                <td>
+                  {{ $tagItem->post->count() }}
+                </td>
                 
                 <td>
                     {{-- <form action="{{ route('tags.edit', $tagItem->id) }}" method="GET">

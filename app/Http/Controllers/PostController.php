@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\Posts\CreatePostsRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
@@ -36,7 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('pages.backend.posts.postsCreateUpdate')->with('categories',Category::all());
+        return view('pages.backend.posts.postsCreateUpdate')->with('categories',Category::all())->with('tags',Tag::all());
     }
 
     /**
@@ -50,7 +51,7 @@ class PostController extends Controller
         
         $image = $request->image->store('posts');
 
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
@@ -58,6 +59,10 @@ class PostController extends Controller
             'published_at' => $request->published_at,
             'category_id' => $request->category,
         ]);
+
+        if($request->tags){
+            $post->tags()->attach($request->tags);
+        }
 
         session()->flash('success','Post Created Successfully');
 
@@ -83,7 +88,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('pages.backend.posts.postsCreateUpdate')->with('posts',$post)->with('categories',Category::all());
+        return view('pages.backend.posts.postsCreateUpdate')->with('posts',$post)->with('categories',Category::all())->with('tags',Tag::all());
     }
 
     /**
@@ -95,7 +100,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only(['title','description','content','published_at','category']);
+        //$data = $request->only(['title','description','content','published_at','category']);
+
+        
         
         if($request->hasFile('image')){
             $image = $request->image->store('posts');
@@ -104,9 +111,16 @@ class PostController extends Controller
 
             $data['image'] = $image;
         }
+
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->content = $request->content;
+        $post->published_at = $request->published_at;
+        $post->category_id = $request->category;
+        $post->save();
         
 
-        $post->update($data);
+        //$post->update($data);
         
         session()->flash('success','Post Updated Successfully');
 
