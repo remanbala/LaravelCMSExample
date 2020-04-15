@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/','HomePageController');
 
 Auth::routes([
   'register' => false, // Registration Routes...
